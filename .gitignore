@@ -1,0 +1,7 @@
+# Heavy original (31MB) — not meant for Pages
+WIS2026 _ _standalone_.html
+*.bak
+
+# Helper scripts and temp extracts
+_*.py
+_*.html

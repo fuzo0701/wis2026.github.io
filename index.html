@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a1628">
+<title>WIS 2026 참가보고서 — Timesoft 블록체인팀</title>
+<style>
+  :root{
+    --ink:#0a1628;
+    --ink-2:#142238;
+    --ink-3:#1c2d47;
+    --paper:#f4f1ea;
+    --paper-2:#ebe6db;
+    --line:#d8d2c4;
+    --line-dark:rgba(244,241,234,0.14);
+    --line-dark-2:rgba(244,241,234,0.28);
+    --gold:#d4a857;
+    --gold-soft:#e6c486;
+    --muted:#6b7589;
+    --muted-dark:rgba(244,241,234,0.62);
+    --text:#1a2336;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--paper);
+    color:var(--text);
+    font-family:'Pretendard','Inter',-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%;}
+  button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;}
+  a{color:inherit;}
+  .mono{font-family:'JetBrains Mono',ui-monospace,monospace;}
+  .gold{color:var(--gold);}
+  strong{font-weight:600;}
+
+  /* ===================== TOP NAV ===================== */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(10,22,40,0.92);backdrop-filter:saturate(140%) blur(10px);
+    color:var(--paper);
+    border-bottom:1px solid var(--line-dark);
+  }
+  .topbar-inner{
+    max-width:1280px;margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;gap:14px;
+    padding:12px 22px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-0.02em;}
+  .brand .mark{width:5px;height:18px;background:var(--gold);}
+  .brand small{
+    font-family:'JetBrains Mono',monospace;font-weight:500;font-size:11px;
+    color:var(--muted-dark);letter-spacing:0.12em;margin-left:4px;
+  }
+  .topbar .meta{
+    font-family:'JetBrains Mono',monospace;font-size:11px;
+    letter-spacing:0.14em;color:var(--muted-dark);
+  }
+  .nav{
+    background:rgba(10,22,40,0.92);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-dark);
+    position:sticky;top:46px;z-index:40;
+  }
+  .nav-inner{
+    max-width:1280px;margin:0 auto;
+    display:flex;gap:6px;padding:10px 22px;overflow-x:auto;
+    scrollbar-width:thin;
+  }
+  .nav-inner::-webkit-scrollbar{height:5px;}
+  .nav-inner::-webkit-scrollbar-thumb{background:var(--line-dark-2);border-radius:5px;}
+  .nav a{
+    flex:none;padding:6px 11px;border-radius:999px;
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;
+    color:var(--muted-dark);text-decoration:none;border:1px solid var(--line-dark);
+    transition:all .15s ease;white-space:nowrap;
+  }
+  .nav a:hover{color:var(--paper);border-color:var(--gold);}
+
+  /* ===================== HERO / COVER ===================== */
+  .cover{
+    position:relative;color:var(--paper);
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 30%, rgba(212,168,87,0.18), transparent 60%),
+      linear-gradient(180deg, #0e1e35 0%, #0a1628 60%, #060f1c 100%);
+    padding:96px 22px 72px;overflow:hidden;
+  }
+  .cover::before, .cover::after{
+    content:"";position:absolute;
+    border:1px solid var(--gold);width:24px;height:24px;
+  }
+  .cover::before{top:38px;left:22px;border-right:none;border-bottom:none;}
+  .cover::after{bottom:38px;right:22px;border-left:none;border-top:none;}
+  .cover-inner{max-width:1100px;margin:0 auto;}
+  .cover-top{
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+    font-family:'JetBrains Mono',monospace;font-size:11px;
+    letter-spacing:0.14em;color:var(--muted-dark);
+    padding-bottom:48px;flex-wrap:wrap;
+  }
+  .cover-top .brand-mark{display:flex;align-items:center;gap:10px;color:var(--paper);}
+  .cover-top .brand-mark .gold-bar{width:28px;height:2px;background:var(--gold);}
+  .cover-kicker{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.22em;
+    color:var(--gold);margin-bottom:18px;
+  }
+  .cover h1{
+    font-size:clamp(40px,8.5vw,96px);font-weight:800;letter-spacing:-0.03em;
+    line-height:1.0;margin-bottom:22px;
+  }
+  .cover-subtitle{
+    font-size:clamp(15px,2.4vw,22px);
+    color:rgba(244,241,234,0.78);font-weight:400;
+    max-width:42ch;line-height:1.45;
+  }
+  .cover-meta-row{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:24px 36px;margin-top:64px;padding-top:36px;
+    border-top:1px solid rgba(244,241,234,0.18);
+  }
+  .cover-meta-row .item .label{
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;
+    letter-spacing:0.18em;color:var(--gold-soft);margin-bottom:8px;
+    text-transform:uppercase;
+  }
+  .cover-meta-row .item .value{
+    font-size:14.5px;color:var(--paper);line-height:1.5;
+  }
+
+  /* ===================== SECTION SHELL ===================== */
+  section.page-block{
+    max-width:1280px;margin:0 auto;
+    padding:64px 22px 72px;
+    border-bottom:1px solid var(--line);
+  }
+  section.page-block:last-of-type{border-bottom:none;}
+  .section-head{
+    display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;
+    margin-bottom:36px;
+  }
+  .section-head .left .kicker{
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.22em;
+    color:var(--gold);text-transform:uppercase;margin-bottom:12px;
+  }
+  .section-head h2{
+    font-size:clamp(28px,5vw,52px);font-weight:700;letter-spacing:-0.025em;
+    color:var(--ink);line-height:1.05;
+  }
+  .section-head .meta{
+    font-size:13.5px;color:var(--muted);line-height:1.55;text-align:right;max-width:34ch;
+  }
+  @media (max-width:640px){ .section-head .meta{text-align:left;} }
+  .section-tag{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.18em;
+    color:var(--muted);text-transform:uppercase;margin-bottom:18px;
+  }
+  .section-tag::before{content:"";width:6px;height:6px;background:var(--gold);}
+
+  /* ===================== TOC ===================== */
+  .toc-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0 32px;
+  }
+  .toc-item{
+    display:grid;grid-template-columns:46px 1fr auto;align-items:baseline;gap:18px;
+    padding:16px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--text);
+    transition:all .12s ease;
+  }
+  .toc-item:hover{background:var(--paper-2);padding-left:8px;padding-right:8px;}
+  .toc-num{
+    font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
+    color:var(--gold);letter-spacing:0.1em;
+  }
+  .toc-title{font-weight:600;font-size:15px;}
+  .toc-title .sub{
+    display:block;font-weight:400;font-size:11.5px;color:var(--muted);
+    font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;margin-top:3px;
+  }
+  .toc-page{
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);
+    letter-spacing:0.14em;
+  }
+
+  /* ===================== OVERVIEW ===================== */
+  .overview-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:44px;align-items:start;}
+  @media (max-width:840px){ .overview-grid{grid-template-columns:1fr;gap:32px;} }
+  .overview-text p{margin-bottom:16px;font-size:14.5px;line-height:1.75;color:var(--text);}
+  .stats-card{
+    background:var(--ink);color:var(--paper);padding:28px 26px;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .stat-row{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding-bottom:12px;border-bottom:1px solid rgba(244,241,234,0.12);
+  }
+  .stat-row:last-child{border-bottom:none;padding-bottom:0;}
+  .stat-label{
+    font-family:'JetBrains Mono',monospace;font-size:11px;
+    color:var(--muted-dark);letter-spacing:0.14em;text-transform:uppercase;
+  }
+  .stat-value{font-size:22px;font-weight:700;letter-spacing:-0.01em;color:var(--gold);}
+  .stat-value .unit{font-size:13px;color:var(--paper);font-weight:400;margin-left:6px;letter-spacing:0;}
+
+  /* ===================== SCHEDULE ===================== */
+  .schedule-wrap{display:grid;grid-template-columns:280px 1fr;gap:36px;align-items:start;}
+  @media (max-width:760px){ .schedule-wrap{grid-template-columns:1fr;gap:24px;} }
+  .day-card{
+    background:var(--ink);color:var(--paper);padding:26px 22px;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .day-num{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:0.22em;color:var(--gold);}
+  .day-date{font-size:34px;font-weight:700;letter-spacing:-0.02em;}
+  .day-meta{font-size:12.5px;color:var(--muted-dark);font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;}
+  .visit-info{
+    margin-top:20px;display:grid;grid-template-columns:90px 1fr;gap:8px 16px;
+    padding-top:16px;border-top:1px solid var(--line);font-size:13px;
+  }
+  .visit-info .l{
+    font-family:'JetBrains Mono',monospace;font-size:11px;
+    color:var(--gold);letter-spacing:0.12em;
+  }
+  .visit-info .v{color:var(--text);line-height:1.55;}
+  .timeline{display:flex;flex-direction:column;gap:14px;}
+  .timeline-item{
+    position:relative;padding:18px 22px 18px 28px;
+    background:var(--paper-2);border-left:3px solid var(--line);
+  }
+  .timeline-item.gold{border-left-color:var(--gold);background:#f0ead8;}
+  .timeline-time{
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.14em;
+    color:var(--gold);margin-bottom:6px;
+  }
+  .timeline-title{font-weight:600;font-size:15px;color:var(--ink);margin-bottom:4px;}
+  .timeline-desc{font-size:13.5px;color:var(--text);line-height:1.6;}
+  .timeline-loc{
+    display:inline-block;margin-top:8px;font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;letter-spacing:0.12em;color:var(--muted);
+  }
+
+  /* ===================== HIGHLIGHTS ===================== */
+  .highlight-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;
+  }
+  .h-card{
+    background:#fff;border:1px solid var(--line);
+    display:flex;flex-direction:column;overflow:hidden;
+  }
+  .h-card.feature{
+    grid-column:1/-1;
+    display:grid;grid-template-columns:1.1fr 1fr;gap:0;
+  }
+  @media (max-width:760px){ .h-card.feature{grid-template-columns:1fr;} }
+  .h-card .h-body{padding:22px 22px 24px;display:flex;flex-direction:column;gap:10px;}
+  .h-card.feature .h-body{order:0;}
+  .h-card.feature .h-photo-wrap{order:1;}
+  @media (max-width:760px){ .h-card.feature .h-photo-wrap{order:-1;} }
+  .h-head{display:flex;justify-content:space-between;align-items:center;gap:8px;}
+  .h-num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;color:var(--gold);}
+  .h-tag{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.16em;
+    color:var(--muted);padding:3px 8px;border:1px solid var(--line);text-transform:uppercase;
+  }
+  .h-title{font-size:17px;font-weight:700;letter-spacing:-0.015em;color:var(--ink);line-height:1.35;}
+  .h-card.feature .h-title{font-size:22px;}
+  .h-desc{font-size:13.5px;color:var(--text);line-height:1.7;}
+  .h-photo-wrap{aspect-ratio:4/3;overflow:hidden;background:var(--ink-2);}
+  .h-card.feature .h-photo-wrap{aspect-ratio:auto;}
+  .h-photo-wrap img{width:100%;height:100%;object-fit:cover;}
+  .h-photo-cap{
+    padding:10px 22px 16px;background:#fff;
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);
+    letter-spacing:0.04em;line-height:1.5;
+  }
+
+  /* ===================== CONFERENCE ===================== */
+  .conf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;}
+  .conf-card{
+    background:#fff;border:1px solid var(--line);padding:24px 22px;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .conf-head{display:flex;flex-direction:column;gap:8px;padding-bottom:14px;border-bottom:1px solid var(--line);}
+  .conf-time{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;
+    color:var(--gold);margin-right:10px;
+  }
+  .conf-track{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.16em;
+    color:var(--muted);text-transform:uppercase;
+  }
+  .conf-card h3{
+    font-size:18px;font-weight:700;letter-spacing:-0.015em;color:var(--ink);line-height:1.35;
+    margin-top:4px;
+  }
+  .conf-speaker{font-size:12.5px;color:var(--muted);line-height:1.55;}
+  .conf-summary{font-size:13.5px;color:var(--text);line-height:1.7;}
+  .conf-takeaways{list-style:none;padding-left:0;display:flex;flex-direction:column;gap:6px;}
+  .conf-takeaways li{
+    position:relative;padding-left:18px;font-size:12.5px;color:var(--text);line-height:1.55;
+  }
+  .conf-takeaways li::before{
+    content:"→";position:absolute;left:0;color:var(--gold);font-family:'JetBrains Mono',monospace;
+  }
+
+  /* ===================== TRENDS ===================== */
+  .trends-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
+  .trend-card{
+    background:var(--ink);color:var(--paper);padding:30px 24px;
+    display:flex;flex-direction:column;gap:12px;
+  }
+  .t-idx{
+    font-family:'JetBrains Mono',monospace;font-size:36px;font-weight:700;
+    color:var(--gold);letter-spacing:-0.02em;line-height:1;
+  }
+  .t-sub{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;
+    color:var(--gold-soft);margin-top:-4px;
+  }
+  .t-title{font-size:18px;font-weight:700;letter-spacing:-0.01em;line-height:1.35;}
+  .t-desc{font-size:13px;color:rgba(244,241,234,0.78);line-height:1.7;}
+  .t-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;margin-top:6px;}
+  .t-list li{display:flex;justify-content:space-between;gap:8px;padding-top:8px;border-top:1px solid rgba(244,241,234,0.12);font-size:11.5px;}
+  .t-list li .k{font-family:'JetBrains Mono',monospace;color:var(--muted-dark);letter-spacing:0.1em;}
+  .t-list li .v{color:var(--paper);text-align:right;}
+
+  /* ===================== BENCHMARK ===================== */
+  .bench-table{
+    width:100%;border-collapse:collapse;background:#fff;
+    border:1px solid var(--line);font-size:13px;
+  }
+  .bench-table th, .bench-table td{
+    padding:14px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);
+  }
+  .bench-table thead th{
+    background:var(--ink);color:var(--paper);
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;
+    font-weight:600;text-transform:uppercase;
+  }
+  .bench-table .co{display:block;font-weight:700;color:var(--ink);font-size:14px;}
+  .bench-table .co-meta{
+    display:block;font-family:'JetBrains Mono',monospace;font-size:10.5px;
+    color:var(--muted);letter-spacing:0.1em;margin-top:4px;
+  }
+  .relevance{display:flex;gap:3px;}
+  .relevance span{width:8px;height:8px;border-radius:50%;background:var(--line);}
+  .relevance .on{background:var(--gold);}
+
+  .bench-photos{
+    margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;
+  }
+  .bench-photo{
+    aspect-ratio:4/3;background:var(--ink-2);position:relative;overflow:hidden;
+  }
+  .bench-photo img{width:100%;height:100%;object-fit:cover;}
+  .bench-photo .ph-cap{
+    position:absolute;left:8px;right:8px;bottom:8px;z-index:2;
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#fff;
+    background:rgba(10,22,40,0.85);padding:6px 10px;line-height:1.45;
+  }
+  @media (max-width:540px){
+    .bench-table{display:block;overflow-x:auto;white-space:nowrap;}
+    .bench-table td, .bench-table th{white-space:normal;min-width:140px;}
+  }
+
+  /* ===================== IMPLICATIONS ===================== */
+  .impl-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+  @media (max-width:760px){ .impl-grid{grid-template-columns:1fr;} }
+  .impl-col{background:#fff;border:1px solid var(--line);padding:24px 22px;}
+  .impl-col.hl{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+  .impl-col h3{
+    display:flex;align-items:center;gap:10px;
+    font-size:17px;font-weight:700;letter-spacing:-0.015em;
+    margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--line);
+  }
+  .impl-col.hl h3{border-bottom-color:rgba(244,241,234,0.18);}
+  .badge{
+    width:30px;height:30px;background:var(--gold);color:var(--ink);
+    display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-weight:700;
+    font-size:13px;
+  }
+  .impl-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:18px;}
+  .impl-list > li{display:grid;grid-template-columns:50px 1fr;gap:14px;}
+  .impl-list .n{
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
+    color:var(--gold);letter-spacing:0.1em;padding-top:4px;
+  }
+  .impl-list .body strong{display:block;font-size:14px;line-height:1.5;color:var(--ink);margin-bottom:6px;}
+  .impl-col.hl .impl-list .body strong{color:var(--paper);}
+  .impl-list .body p{font-size:13px;color:var(--text);line-height:1.65;}
+  .impl-col.hl .impl-list .body p{color:rgba(244,241,234,0.78);}
+
+  /* ===================== RECOMMENDATIONS ===================== */
+  .rec-hero{
+    background:var(--ink);color:var(--paper);padding:36px 28px;margin-bottom:24px;
+  }
+  .rec-hero .label{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;
+    color:var(--gold);margin-bottom:12px;
+  }
+  .rec-hero .lead{font-size:17px;line-height:1.65;color:var(--paper);}
+  .rec-hero em{color:var(--gold);font-style:normal;font-weight:600;}
+  .rec-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;}
+  .rec-card{
+    background:#fff;border:1px solid var(--line);padding:24px 22px;
+    display:flex;flex-direction:column;gap:12px;
+  }
+  .rec-tag{
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.16em;
+    color:var(--gold);text-transform:uppercase;
+  }
+  .rec-card h4{font-size:17px;font-weight:700;letter-spacing:-0.015em;color:var(--ink);line-height:1.35;}
+  .rec-card p{font-size:13.5px;color:var(--text);line-height:1.7;}
+  .rec-meta{
+    display:flex;justify-content:space-between;gap:12px;
+    padding-top:8px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);
+  }
+  .rec-meta .k{font-family:'JetBrains Mono',monospace;letter-spacing:0.12em;color:var(--gold);}
+  .signoff{
+    margin-top:24px;padding:20px 22px;background:var(--paper-2);
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:0.06em;
+  }
+  .signoff strong{color:var(--ink);margin-right:8px;}
+
+  /* ===================== GALLERY ===================== */
+  .gal-stats{
+    display:flex;gap:22px;margin-bottom:30px;flex-wrap:wrap;
+  }
+  .gal-stat{display:flex;flex-direction:column;}
+  .gal-stat .num{font-size:24px;font-weight:700;color:var(--gold);letter-spacing:-0.02em;}
+  .gal-stat .label{
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);
+    letter-spacing:0.16em;text-transform:uppercase;
+  }
+  .topic{padding:30px 0;border-bottom:1px solid var(--line);}
+  .topic:last-child{border-bottom:none;}
+  .topic-head{display:grid;grid-template-columns:auto 1fr auto;gap:12px 18px;align-items:start;margin-bottom:18px;}
+  .topic-num{
+    font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
+    background:var(--gold);color:var(--ink);padding:6px 11px;letter-spacing:0.1em;align-self:start;
+  }
+  .topic-title{font-size:18px;font-weight:600;letter-spacing:-0.015em;color:var(--ink);}
+  .topic-count{
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.14em;
+    color:var(--muted);align-self:start;padding-top:9px;
+  }
+  .topic-desc{
+    grid-column:2/3;color:var(--text);font-size:13.5px;line-height:1.7;max-width:75ch;
+  }
+  @media (max-width:640px){
+    .topic-head{grid-template-columns:auto 1fr;}
+    .topic-count{grid-column:1/3;padding-top:0;}
+    .topic-desc{grid-column:1/3;}
+  }
+  .topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;}
+  @media (max-width:480px){ .topic-grid{grid-template-columns:repeat(2,1fr);gap:8px;} }
+  .gal-card{
+    position:relative;background:var(--ink-3);border:1px solid var(--line);
+    overflow:hidden;cursor:pointer;transition:transform .2s ease,border-color .2s ease;padding:0;
+  }
+  .gal-card:hover{border-color:var(--gold);transform:translateY(-2px);}
+  .gal-card-img{aspect-ratio:4/3;overflow:hidden;}
+  .gal-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease;}
+  .gal-card:hover .gal-card-img img{transform:scale(1.04);}
+  .gal-card-id{
+    position:absolute;top:7px;left:7px;
+    background:rgba(10,22,40,0.82);color:var(--paper);
+    padding:3px 8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;
+  }
+
+  /* Lightbox */
+  .lb{
+    position:fixed;inset:0;z-index:200;
+    background:rgba(5,12,22,0.97);backdrop-filter:blur(8px);
+    display:none;align-items:center;justify-content:center;padding:18px;
+    color:var(--paper);
+  }
+  .lb.is-open{display:flex;}
+  .lb-stage{
+    position:relative;width:100%;height:100%;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+  }
+  .lb-img{max-width:100%;max-height:calc(100vh - 200px);object-fit:contain;pointer-events:none;}
+  .lb-meta{
+    margin-top:18px;width:100%;max-width:780px;
+    display:grid;grid-template-columns:auto 1fr;gap:8px 16px;align-items:start;
+  }
+  .lb-id{
+    font-family:'JetBrains Mono',monospace;font-size:11px;
+    background:var(--gold);color:var(--ink);padding:5px 10px;letter-spacing:0.14em;align-self:start;
+  }
+  .lb-cap{font-size:14.5px;line-height:1.65;color:rgba(244,241,234,0.92);}
+  .lb-counter{
+    margin-top:6px;font-family:'JetBrains Mono',monospace;font-size:11px;
+    color:var(--muted-dark);letter-spacing:0.14em;grid-column:2/3;
+  }
+  .lb-btn{
+    position:absolute;width:44px;height:44px;border-radius:50%;
+    background:rgba(244,241,234,0.07);border:1px solid var(--line-dark);
+    color:var(--paper);font-size:20px;display:grid;place-items:center;
+    transition:all .15s ease;-webkit-tap-highlight-color:transparent;
+  }
+  .lb-btn:hover{background:rgba(244,241,234,0.14);border-color:var(--gold);}
+  .lb-prev{left:14px;top:50%;transform:translateY(-50%);}
+  .lb-next{right:14px;top:50%;transform:translateY(-50%);}
+  .lb-close{top:14px;right:14px;}
+
+  /* ===================== EPILOGUE ===================== */
+  .epi-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:36px;align-items:start;}
+  @media (max-width:840px){ .epi-grid{grid-template-columns:1fr;} }
+  .epi-photo{
+    aspect-ratio:3/4;background:linear-gradient(135deg,#142238,#1c2d47);
+    border:1px solid var(--line);position:relative;
+  }
+  .epi-photo::after{
+    content:"WIS 2026 · VISITOR PASS";
+    position:absolute;inset:0;display:grid;place-items:center;
+    color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:13px;
+    letter-spacing:0.18em;text-align:center;padding:0 16px;
+  }
+  .epi-caption{
+    margin-top:10px;display:flex;justify-content:space-between;
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.14em;
+  }
+  .epi-caption .gold{color:var(--gold);}
+  .epi-quote{
+    font-size:clamp(20px,3vw,28px);font-weight:600;letter-spacing:-0.015em;
+    line-height:1.45;color:var(--ink);margin-bottom:24px;padding-left:18px;
+    border-left:3px solid var(--gold);
+  }
+  .epi-body p{margin-bottom:14px;font-size:14.5px;line-height:1.8;color:var(--text);}
+  .epi-callout{
+    margin-top:24px;background:var(--ink);color:var(--paper);padding:24px 22px;
+  }
+  .cal-tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;color:var(--gold);}
+  .cal-head{margin-top:10px;font-size:16px;font-weight:600;line-height:1.55;}
+  .cal-body{margin-top:10px;font-size:13.5px;color:rgba(244,241,234,0.78);line-height:1.7;}
+  .epi-byline{
+    margin-top:22px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--muted);letter-spacing:0.08em;
+  }
+  .epi-byline .who strong{color:var(--ink);margin-right:8px;}
+  .epi-byline .who-names{margin-top:4px;font-size:13px;color:var(--ink);}
+  .epi-byline .stamp{color:var(--gold);}
+
+  /* ===================== FOOTER ===================== */
+  footer.report-foot{
+    background:var(--ink);color:var(--paper);padding:36px 22px;
+  }
+  .foot-inner{
+    max-width:1280px;margin:0 auto;
+    display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:var(--muted-dark);
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important;animation:none !important;}
+    html{scroll-behavior:auto;}
+  }
+
+  @media print{
+    .topbar,.nav,.lb{display:none;}
+    body{background:#fff;color:#000;}
+    section.page-block{page-break-inside:avoid;}
+    .stats-card,.day-card,.trend-card,.impl-col.hl,.rec-hero,.epi-callout,footer.report-foot{
+      background:#fff !important;color:#000 !important;border:1px solid #ccc;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><span class="mark"></span>WIS 2026<small>· REPORT</small></div>
+    <div class="meta">TIMESOFT · BLOCKCHAIN TEAM</div>
+  </div>
+</div>
+
+<!-- SECTION NAV -->
+<nav class="nav" aria-label="섹션 네비게이션">
+  <div class="nav-inner">
+    <a href="#cover">01 표지</a>
+    <a href="#toc">02 목차</a>
+    <a href="#overview">03 개요</a>
+    <a href="#schedule">04 일정</a>
+    <a href="#highlights">05 하이라이트</a>
+    <a href="#conference">06 컨퍼런스</a>
+    <a href="#trends">07 트렌드</a>
+    <a href="#benchmark">08 벤치마킹</a>
+    <a href="#implications">09 시사점</a>
+    <a href="#recommendations">10 제언</a>
+    <a href="#gallery">11 갤러리</a>
+    <a href="#epilogue">12 후기</a>
+  </div>
+</nav>
+
+<!-- 01 COVER -->
+<section id="cover" class="cover">
+  <div class="cover-inner">
+    <div class="cover-top">
+      <div class="brand-mark"><span class="gold-bar"></span><span>Timesoft · Blockchain Team</span></div>
+      <div>Conference Report · Confidential</div>
+    </div>
+    <div class="cover-kicker">World IT Show 2026 — Participation Report</div>
+    <h1>WIS 2026<br>참가보고서</h1>
+    <p class="cover-subtitle">생각을 넘어 행동으로: AI, 현실을 움직이다</p>
+    <div class="cover-meta-row">
+      <div class="item"><div class="label">Event</div><div class="value">World IT Show 2026</div></div>
+      <div class="item"><div class="label">Period · Venue</div><div class="value">2026.04.22(수)–24(금) · COEX</div></div>
+      <div class="item"><div class="label">Visit Date</div><div class="value">2026.04.24(금) · Day 3</div></div>
+      <div class="item"><div class="label">Prepared by</div><div class="value">블록체인팀 이진명, 장재윤</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 TOC -->
+<section id="toc" class="page-block">
+  <div class="section-tag">Table of Contents</div>
+  <div class="section-head">
+    <div class="left">
+      <div class="kicker">— Contents</div>
+      <h2>목차</h2>
+    </div>
+    <div class="meta">본 보고서는 총 11개 섹션으로 구성됩니다.<br>표지 · 개요 · 일정 · 전시 · 컨퍼런스 · 트렌드 · 벤치마킹 · 시사점 · 제언 · 갤러리 · 후기 순으로 전개됩니다.</div>
+  </div>
+  <div class="toc-grid" id="tocGrid"></div>
+</section>
+
+<!-- 03 OVERVIEW -->
+<section id="overview" class="page-block">
+  <div class="section-tag">03 / Event Overview</div>
+  <div class="section-head">
+    <div class="left">
+      <div class="kicker">— Section 01</div>
+      <h2>행사 개요</h2>
+    </div>
+    <div class="meta">World IT Show 2026<br>국내 최대 규모의 정보통신·ICT 융합 전시회</div>
+  </div>
+  <div class="overview-grid">
+    <div class="overview-text">
+      <p><strong>월드 IT 쇼(World IT Show, WIS)</strong>는 과학기술정보통신부가 주최하고 국내 주요 ICT 협·단체가 공동 주관하는 국내 최대 규모의 정보통신·ICT 융합 전시회입니다. 2008년부터 매년 개최되어 온 본 행사는 국내외 ICT 산업의 최신 동향과 신기술을 한자리에서 확인할 수 있는 대표적 산업 플랫폼으로 자리매김하였습니다.</p>
+      <p>2026년 행사는 <strong>'생각을 넘어 행동으로: AI, 현실을 움직이다'</strong>를 슬로건으로, <strong>'피지컬 AI(Physical AI) 대전환'</strong>을 핵심 키워드로 내세우며 4월 22일(수)부터 24일(금)까지 3일간 서울 코엑스(COEX) 전시장 전관에서 개최되었습니다. 생성형 AI·온디바이스 AI·AI 반도체·DX 솔루션·차세대 통신·로보틱스 등 산업 전반의 핵심 기술이 집중 소개되었습니다.</p>
+      <p>당사 블록체인팀은 자사 사업 아이디어 탐색 및 신기술·솔루션 벤치마킹을 목적으로 행사 마지막 날인 <strong>4월 24일(금) Day 3</strong>에 참관하였으며, 본 보고서는 그 결과를 정리한 것입니다.</p>
+    </div>
+    <div class="stats-card">
+      <div class="stat-row"><span class="stat-label">Edition</span><span class="stat-value">19th<span class="unit">회차</span></span></div>
+      <div class="stat-row"><span class="stat-label">Period</span><span class="stat-value">3<span class="unit">일</span></span></div>
+      <div class="stat-row"><span class="stat-label">Exhibitors</span><span class="stat-value">500<span class="unit">+ 사</span></span></div>
+      <div class="stat-row"><span class="stat-label">Booths</span><span class="stat-value">1,200<span class="unit">+ 부스</span></span></div>
+      <div class="stat-row"><span class="stat-label">Visitors</span><span class="stat-value">60,000<span class="unit">+ 명</span></span></div>
+      <div class="stat-row"><span class="stat-label">Tracks</span><span class="stat-value">12<span class="unit">개 트랙</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 SCHEDULE -->
+<section id="schedule" class="page-block">
+  <div class="section-tag">04 / Visit Schedule</div>
+  <div class="section-head">
+    <div class="left">
+      <div class="kicker">— Section 02</div>
+      <h2>참관 일정</h2>
+    </div>
+    <div class="meta">2026.04.24(금) · Day 3<br>09:30 — 17:30 · COEX Hall A·B·C·D</div>
+  </div>
+  <div class="schedule-wrap">
+    <div class="schedule-side">
+      <div class="day-card">
+        <div class="day-num">DAY 3</div>
+        <div class="day-date">04.24(금)</div>
+        <div class="day-meta">— Final Day · 2026</div>
+      </div>
+      <div class="visit-info"><div class="l">참관 인원</div><div class="v">블록체인팀<br>이진명 · 장재윤</div></div>
+      <div class="visit-info"><div class="l">주요 동선</div><div class="v">Hall A → D → C → B<br>(AI → DX → 통신 → 스타트업)</div></div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item gold">
+        <div class="timeline-time">09:30 — 10:00</div>
+        <div class="timeline-title">등록 및 행사장 입장</div>
+        <div class="timeline-desc">사전 등록자 패스트 입장 / 공식 가이드북·전시 맵 수령, 당일 일정 최종 점검</div>
+        <span class="timeline-loc">COEX · Main Entrance</span>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">10:00 — 12:00</div>
+        <div class="timeline-title">Hall A · ITRC 인재양성대전 + ICT 기술사업화 페스티벌</div>
+        <div class="timeline-desc">IITP·TTA·ETRI·KETI 등 관·학·연 결과물 전시 — AI·빅데이터, 클라우드·보안·블록체인, 양자기술, AI플랫폼 부스 중심</div>
+        <span class="timeline-loc">Hall A</span>
+      </div>
+      <div class="timeline-item gold">
+        <div class="timeline-time">13:00 — 14:00</div>
+        <div class="timeline-title">[Session 1] AI 시대, 개인정보보호 체계 대전환</div>
+        <div class="timeline-desc">김직동 / 개인정보보호위원회 개인정보보호정책과장</div>
+        <span class="timeline-loc">Conference Room</span>
+      </div>
+      <div class="timeline-item gold">
+        <div class="timeline-time">14:00 — 15:00</div>
+        <div class="timeline-title">[Session 2] Physical AI용 AI 반도체</div>
+        <div class="timeline-desc">유회준 / KAIST 교수</div>
+        <span class="timeline-loc">Conference Room</span>
+      </div>
+      <div class="timeline-item gold">
+        <div class="timeline-time">15:00 — 16:00</div>
+        <div class="timeline-title">[Session 3] 생각을 넘어 행동으로 — Full-Stack AI 전략</div>
+        <div class="timeline-desc">윤두희 / SK텔레콤 AI정책연구원 부사장</div>
+        <span class="timeline-loc">Conference Room</span>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">16:00 — 17:30</div>
+        <div class="timeline-title">Hall C · 대기업군 AI Solution 전시관 참관</div>
+        <div class="timeline-desc">SKT·KT·삼성·LG 등 자사 제품 홍보 및 AI Solution — 자체 LLM 고도화, 각 산업군 AX 도입 사례 시연</div>
+        <span class="timeline-loc">Hall C</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 HIGHLIGHTS -->
+<section id="highlights" class="page-block">
+  <div class="section-tag">05 / Exhibition Highlights</div>
+  <div class="section-head">
+    <div class="left">
+      <div class="kicker">— Section 03</div>
+      <h2>전시 하이라이트</h2>
+    </div>
+    <div class="meta">관람 기준 인상 깊은 전시 부스 및 전시품 정리<br>AI 플랫폼 · 온디바이스 AI · DX 솔루션 중심</div>
+  </div>
+  <div class="highlight-grid">
+    <div class="h-card feature">
+      <div class="h-body">
+        <div class="h-head"><span class="h-num">— 01</span><span class="h-tag">Highlight</span></div>
+        <div class="h-title">SKT A.X K1 — 국가대표 파운데이션 모델 공개</div>
+        <div class="h-desc">SK텔레콤이 from-scratch 방식으로 개발한 자체 파운데이션 모델 <strong>A.X K1</strong>이 대형 LED 월에 13종 벤치마크 결과와 함께 전시되었습니다. DeepSeek V3.1 대비 평균 우위(약 1.01배 a/b 비율)를 강조하며, 한국어·코딩·수학·지시이행 등 주요 영역에서의 경쟁력을 가시화한 점이 인상적이었습니다.</div>
+      </div>
+      <div class="h-photo-wrap"><img loading="lazy" src="gallery/003-1.jpg" alt="SKT A.X K1"></div>
+    </div>
+    <div class="h-card">
+      <div class="h-photo-wrap"><img loading="lazy" src="gallery/006-1.jpg" alt="Managed AI GPU Infra"></div>
+      <div class="h-body">
+        <div class="h-head"><span class="h-num">— 02</span><span class="h-tag">AI Infra</span></div>
+        <div class="h-title">Managed AI GPU Infra — MLOps 자원관리</div>
+        <div class="h-desc"><strong>1 GPU를 최대 100분할</strong>까지 할 수 있으며, 자동할당·멀티유저 관리·중앙관리·멀티노드 학습지원을 제공하는 MLOps 자원관리 시스템이 시연되었습니다.</div>
+      </div>
+    </div>
+    <div class="h-card">
+      <div class="h-photo-wrap"><img loading="lazy" src="gallery/007-1.jpg" alt="K intelligence Studio"></div>
+      <div class="h-body">
+        <div class="h-head"><span class="h-num">— 03</span><span class="h-tag">DX</span></div>
+        <div class="h-title">K intelligence Studio — Agent Template</div>
+        <div class="h-desc"><strong>고객사 표준 양식에 맞춰 정보를 입력하면 양식이 자동 변경</strong>되는 문서 자동화 에이전트가 시연되었습니다. 노코드 기반 Agent 워크플로우 구성 환경이 제공됩니다.</div>
+      </div>
+    </div>
+    <div class="h-card">
+      <div class="h-photo-wrap"><img loading="lazy" src="gallery/021-1.jpg" alt="Winging"></div>
+      <div class="h-body">
+        <div class="h-head"><span class="h-num">— 04</span><span class="h-tag">Industry</span></div>
+        <div class="h-title">Winging — 공공 행정 AI 어시스턴트</div>
+        <div class="h-desc">민원 유형 통계 분석부터 이용 현황 파악, 홈페이지 정보 자동 수집까지 <strong>관리자 페이지 한 곳에서</strong> 처리 가능한 공공 특화 AI 솔루션. 폐쇄망 적용 옵션과 함께 규제 산업 도입 가능성을 확인.</div>
+      </div>
+    </div>
+    <div class="h-card">
+      <div class="h-photo-wrap"><img loading="lazy" src="gallery/031-1.jpg" alt="FIRSTLO"></div>
+      <div class="h-body">
+        <div class="h-head"><span class="h-num">— 05</span><span class="h-tag">Startup</span></div>
+        <div class="h-title">FIRSTLO — 블록체인 기반 바이오 AIoT 콜드체인 물류 플랫폼</div>
+        <div class="h-desc">AI와 블록체인을 결합하여 바이오 의약품 등 온도 민감 화물의 콜드체인 전 구간을 IoT 센싱·온체인 기록으로 추적. <strong>자사 사업과의 직접 접점이 가장 큰 영역</strong>으로, 후속 미팅 후보로 식별.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 CONFERENCE -->
+<section id="conference" class="page-block">
+  <div class="section-tag">06 / Conference Sessions</div>
+  <div class="section-head">
+    <div class="left">
+      <div class="kicker">— Section 04</div>
+      <h2>컨퍼런스 세션</h2>
+    </div>
+    <div class="meta">참관일(4/24) 13:00 — 16:00 청취 주요 세션 3건<br>개인정보보호 · AI 반도체 · Full-Stack AI 전략</div>
+  </div>
+  <div class="conf-grid">
+    <div class="conf-card">
+      <div class="conf-head">
+        <div><span class="conf-time">13:00 — 14:00</span><span class="conf-track">Session 1 · Policy</span></div>
+        <h3>AI 시대, 개인정보보호 체계 대전환</h3>
+        <div class="conf-speaker">발표 · <strong>김직동</strong><br>개인정보보호위원회 개인정보보호정책과장</div>
+      </div>
+      <div class="conf-summary">AI 시대 도래로 기존 개인정보보호 체계의 근본적 재설계가 필요함을 강조하였습니다. <strong>학습 단계 가명·합성정보 가이드라인</strong>, 모델 영향평가 체계, 권리구제 절차 정비 방향을 단계별로 제시하며, EU AI Act 등 글로벌 규제와의 정합성을 고려한 국내 정책 로드맵이 공유되었습니다.</div>
+      <ul class="conf-takeaways">
+        <li>학습 단계 가명·합성정보 활용 가이드라인 명확화</li>
+        <li>모델 추론·서비스 단계의 개인정보 영향평가 체계 도입</li>
+        <li>EU AI Act 등 글로벌 규제 정합성 고려한 로드맵</li>
+      </ul>
+    </div>
+    <div class="conf-card">
+      <div class="conf-head">
+        <div><span class="conf-time">14:00 — 15:00</span><span class="conf-track">Session 2 · Semiconductor</span></div>
+        <h3>Physical AI용 AI 반도체</h3>
+        <div class="conf-speaker">발표 · <strong>유회준</strong><br>KAIST 교수</div>
+      </div>
+      <div class="conf-summary">클라우드 중심 LLM을 넘어 <strong>로보틱스·자율주행 등 물리세계와 상호작용하는 Physical AI</strong>를 위한 차세대 반도체 아키텍처가 소개되었습니다. PIM·뉴로모픽·인메모리 컴퓨팅 연구 동향과 함께, 한국이 메모리 반도체 강점을 바탕으로 확보 가능한 차별화 영역이 제시되었습니다.</div>
+      <ul class="conf-takeaways">
+        <li>PIM·뉴로모픽·인메모리 컴퓨팅 연구 동향</li>
+        <li>한국 메모리 강점 기반 차별화 영역</li>
+        <li>저전력·실시간 온디바이스 NPU 설계 동향</li>
+      </ul>
+    </div>
+    <div class="conf-card">
+      <div class="conf-head">
+        <div><span class="conf-time">15:00 — 16:00</span><span class="conf-track">Session 3 · Strategy</span></div>
+        <h3>생각을 넘어 행동으로 — Full-Stack AI 전략</h3>
+        <div class="conf-speaker">발표 · <strong>윤두희</strong><br>SK텔레콤 AI정책연구원 부사장</div>
+      </div>
+      <div class="conf-summary">'생각하는 AI(Reasoning)'에서 <strong>'행동하는 AI(Agentic AI)'</strong>로의 전환을 진단하고, 이를 실현하려면 <strong>모델·데이터·인프라·서비스·정책</strong>을 아우르는 Full-Stack 전략이 필수임을 강조하였습니다. SKT A.X K1 기반 산업 적용 로드맵과 국가 AI 경쟁력 확보를 위한 민관 협력 방향이 함께 제시되었습니다.</div>
+      <ul class="conf-takeaways">
+        <li>Reasoning AI → Agentic AI 전환</li>
+        <li>A.X K1 기반 산업 적용 로드맵</li>
+        <li>국가 AI 경쟁력 확보 위한 민관 협력 방향</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 07 TRENDS -->
+<section id="trends" class="page-block">
+  <div class="section-tag">07 / Technology Trends</div>
+  <div class="section-head">
+    <div class="left">
+      <div class="kicker">— Section 05</div>
+      <h2>기술 트렌드 · AI / GenAI</h2>
+    </div>
+    <div class="meta">참관 결과 도출한 3가지 핵심 흐름<br>Agentic AI · On-device AI · Trustworthy AI</div>
+  </div>
+  <div class="trends-row">
+    <div class="trend-card">
+      <div class="t-idx">01</div>
+      <div class="t-sub">— Agentic AI</div>
+      <div class="t-title">단일 LLM에서 '에이전트 오케스트레이션'으로</div>
+      <div class="t-desc">단일 챗봇 형태를 넘어, 여러 전문 에이전트가 도구·데이터·워크플로우를 자율 조합하는 '에이전트 시스템'이 사실상의 표준으로 자리잡고 있음을 확인하였습니다.</div>
+      <ul class="t-list">
+        <li><span class="k">Keyword</span><span class="v">Multi-Agent</span></li>
+        <li><span class="k">Stack</span><span class="v">RAG · Tool-use · Memory</span></li>
+        <li><span class="k">Adoption</span><span class="v">PoC → 운영 전환기</span></li>
+      </ul>
+    </div>
+    <div class="trend-card">
+      <div class="t-idx">02</div>
+      <div class="t-sub">— On-device AI</div>
+      <div class="t-title">엣지·디바이스에서 동작하는 경량 LLM</div>
+      <div class="t-desc">NPU·모바일 AP 성능 향상과 sLLM 최적화 기법이 결합되며, 클라우드 의존을 줄인 온디바이스 AI 솔루션이 가전·모빌리티·산업 디바이스 영역으로 확산되고 있습니다.</div>
+      <ul class="t-list">
+        <li><span class="k">Keyword</span><span class="v">sLLM · NPU</span></li>
+        <li><span class="k">Driver</span><span class="v">비용 · 보안 · Latency</span></li>
+        <li><span class="k">Adoption</span><span class="v">초기 상용화 단계</span></li>
+      </ul>
+    </div>
+    <div class="trend-card">
+      <div class="t-idx">03</div>
+      <div class="t-sub">— Trustworthy AI</div>
+      <div class="t-title">AI 신뢰성 · 출처 검증 영역의 부상</div>
+      <div class="t-desc">GenAI 산출물의 출처·무결성·책임소재가 정책·기업 양측에서 핵심 이슈로 부각되었으며, 블록체인·전자서명·콘텐츠 자격증명 기술이 결합된 솔루션이 다수 등장하였습니다. 자사 사업과 가장 밀접한 영역입니다.</div>
+      <ul class="t-list">
+        <li><span class="k">Keyword</span><span class="v">Provenance · Watermark</span></li>
+        <li><span class="k">Driver</span><span class="v">규제 · 신뢰 · 감사</span></li>
+        <li><span class="k">Adoption</span><span class="v">신규 시장 형성기</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 08 BENCHMARK -->
+<section id="benchmark" class="page-block">
+  <div class="section-tag">08 / Benchmark</div>
+  <div class="section-head">
+    <div class="left">
+      <div class="kicker">— Section 06</div>
+      <h2>벤치마킹</h2>
+    </div>
+    <div class="meta">자사 사업 관점에서 주목한 기업·솔루션 3종<br>AI 협업 · 음성 AI · GPU 인프라 영역</div>
+  </div>
+  <div class="bench-wrap">
+    <table class="bench-table">
+      <thead>
+        <tr><th>기업 / 부스</th><th>핵심 솔루션</th><th>특징 및 차별점</th><th>자사 연관도</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="co">NOWORKS</span><span class="co-meta">AI · Collab Messenger</span></td>
+          <td>AI 협업 메신저 · 다국어 실시간 번역</td>
+          <td>대화 내 AI 범위 요약 · 실시간 다국어 번역(VI-VN 등) · 화상회의 통합. 글로벌 분산 조직 협업 시나리오에 최적화</td>
+          <td><span class="relevance"><span class="on"></span><span class="on"></span><span></span><span></span><span></span></span></td>
+        </tr>
+        <tr>
+          <td><span class="co">SKT — A.note</span><span class="co-meta">AI · Voice Note</span></td>
+          <td>실시간 음성 인식 기반 AI 회의록</td>
+          <td>"Connect Ideas with AI Voice Note" — 실시간 음성 받아쓰기 + 회의록 자동 요약 + 액션 아이템 추출. 모바일·데스크톱 동기화 지원</td>
+          <td><span class="relevance"><span class="on"></span><span class="on"></span><span></span><span></span><span></span></span></td>
+        </tr>
+        <tr>
+          <td><span class="co">데이터얼라이언스 — gcube</span><span class="co-meta">GPU Cloud · AF103</span></td>
+          <td>GPU 클라우드 서비스 — 비용 최대 50% 절감</td>
+          <td>전세계 다양한 Region 보유 · Data Center GPU(B300/B200/H200/H100) + GeForce RTX(50/40 Series). Docker 이미지 하나로 GPU 위에 즉시 배포. <strong>CES 2026 Innovation Awards · Global AI Impact Award</strong> 수상</td>
+          <td><span class="relevance"><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="bench-photos">
+      <div class="bench-photo"><img loading="lazy" src="gallery/028-1.jpg" alt="NOWORKS"><span class="ph-cap">— NOWORKS · AI 협업 메신저</span></div>
+      <div class="bench-photo"><img loading="lazy" src="gallery/002-1.jpg" alt="A.note"><span class="ph-cap">— A.note · Connect Ideas with AI Voice Note</span></div>
+      <div class="bench-photo"><img loading="lazy" src="gallery/034-1.jpg" alt="gcube"><span class="ph-cap">— 데이터얼라이언스 · gcube GPU Cloud</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 IMPLICATIONS -->
+<section id="implications" class="page-block">
+  <div class="section-tag">09 / Key Implications</div>
+  <div class="section-head">
+    <div class="left">
+      <div class="kicker">— Section 07</div>
+      <h2>시사점</h2>
+    </div>
+    <div class="meta">시장 관점 · 자사 관점의 두 축으로 정리<br>블록체인팀 사업 방향성 도출 근거</div>
+  </div>
+  <div class="impl-grid">
+    <div class="impl-col">
+      <h3><span class="badge">M</span>시장 측면</h3>
+      <ul class="impl-list">
+        <li>
+          <span class="n">M.01</span>
+          <div class="body"><strong>2026년은 AI 혁신의 '과도기' — 완성도보다 아이디어 선점이 중요한 해</strong>
+            <p>완벽한 AI 혁신 제품이 아닌, 아이디어 단계의 선점 경쟁이 치열하며, 기업들의 AX 전환 시도가 전반적으로 관찰되는 과도기에 있습니다.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">M.02</span>
+          <div class="body"><strong>스타트업은 자체 LLM보다 '외부 LLM 활용 + 도메인 특화' 전략이 주류</strong>
+            <p>B홀 스타트업 다수가 자체 모델 확보보다 외부 LLM 기반 워크플로우 자동화·조직 맞춤형 Team Agent·비정형 데이터 처리 제공으로 자리잡으며, 대부분 반자동화 수준입니다.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">M.03</span>
+          <div class="body"><strong>대기업은 기존 자산·레퍼런스 기반 AI 고도화가 압도적</strong>
+            <p>SKT는 자체 LLM 및 AI 비서를 고도화하고, KT는 산업군별 AX 도입 사례를 제시하며 '기존 제품 자산'에 올라타는 속도가 스타트업과 명확히 대비되었습니다.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="impl-col hl">
+      <h3><span class="badge">T</span>자사 관점</h3>
+      <ul class="impl-list">
+        <li>
+          <span class="n">T.01</span>
+          <div class="body"><strong>과도기 시장에서는 '아이디어 선점'이 우선 — AI 기반 신규 아이디어 발굴 필수</strong>
+            <p>완벽한 제품보다 <strong>자사 사업과 연계 가능한 AI 아이디어를 먼저 도출·선점</strong>하여 메시지 우위를 확보해야 하며, 단순 모델 데모 수준에 머물지 않고 실제 산업 적용 관점에서 재정의가 요구됩니다.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">T.02</span>
+          <div class="body"><strong>스타트업과 동일한 경쟁구도 — 자사 차별화는 'SI Project 완성도' 축으로</strong>
+            <p>외부 LLM 활용 + 도메인 특화 전략은 이미 다수 스타트업이 취하는 표준 접근이므로, 자사는 <strong>기존 SI Project로 확보한 실제 구현·운영 자산을 바탕으로 상품화·FDE 확장</strong>이라는 대체 불가능한 축으로 포지셔닝해야 합니다.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">T.03</span>
+          <div class="body"><strong>대기업 패턴을 차용 — PoC에 머물지 말고 1차 상품화로 연결</strong>
+            <p>SKT·KT가 기존 자산을 지렛대 삼아 빠르게 AI로 고도화한 방식을 참고하여, 자사도 <strong>아이디어 → 경량 PoC → 1차 상품화 → 클라이언트 FDE</strong> 흐름을 정례화해 아이디어가 실제 먹거리로 이어지는 파이프라인을 구축해야 합니다.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 10 RECOMMENDATIONS -->
+<section id="recommendations" class="page-block">
+  <div class="section-tag">10 / Recommendations</div>
+  <div class="section-head">
+    <div class="left">
+      <div class="kicker">— Section 08</div>
+      <h2>제언</h2>
+    </div>
+    <div class="meta">블록체인팀 차원의 단·중기 액션 아이템<br>3개 우선과제 + 일정 제안</div>
+  </div>
+  <div class="rec-hero">
+    <div class="label">— Strategic Direction</div>
+    <div class="lead">참관에서 확인한 <em>피지컬 AI · 온디바이스 AI · GenAI 자동화</em> 흐름을 단서로,<br>자사 사업과 연계 가능한 <em>AI 기반 신규 아이디어를 정기적으로 발굴·축적</em>하고 단계적 상품화로 연결할 것을 제언합니다.</div>
+  </div>
+  <div class="rec-list">
+    <div class="rec-card">
+      <div class="rec-tag">— Priority 01 · Short-term</div>
+      <h4>SI Project 솔루션 상품화</h4>
+      <p>현장에서 본 솔루션(국방부·민간)은 <strong>AI를 이용해 MD(Markdown) 파일을 산출하는 단계까지만 구현</strong>되어 있으며, 아키텍처·화면설계서 등 실제 산출물 구현은 미비한 것으로 판단됩니다. 현장 질의에서도 "MD 파일 출력만 사용 중"임을 확인하였습니다. <strong>자사의 SI Project 솔루션보다 완성도 낮은 솔루션을 보유</strong>하고 있어, 이를 보완·상품화하는 방향이 유효합니다.</p>
+      <div class="rec-meta"><span class="k">Owner</span><span>블록체인팀 + 사업기획</span></div>
+      <div class="rec-meta"><span class="k">Timeline</span><span>~ 2026.06 (상품화 검토)</span></div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-tag">— Priority 02 · Mid-term</div>
+      <h4>PoC에서 사업화로 — 1차 상품화 후 FDE 전개</h4>
+      <p>현재 PoC 단계에 머물러 있는 AI 결합형 솔루션을 <strong>사업화 단계로 전환</strong>합니다. 우선 내부 아이디어를 도출·정제하여 <strong>1차 상품화(MVP)</strong>를 완성한 뒤, 이후 클라이언트별 도메인·요구사항에 맞춰 <strong>FDE(Forward-Deployed Engineer) 방식의 맞춤 적용</strong>으로 확장하는 단계적 전개 방향을 검토합니다.</p>
+      <div class="rec-meta"><span class="k">Owner</span><span>블록체인팀 + 사업기획</span></div>
+      <div class="rec-meta"><span class="k">Timeline</span><span>~ 2026.07</span></div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-tag">— Priority 03 · Mid-term</div>
+      <h4>아이디어 발굴 — 추후 먹거리 확보</h4>
+      <p>이번 참관에서 확인한 <strong>피지컬 AI · 온디바이스 AI · AI×블록체인 결합 영역</strong>을 단서로, 자사가 선점 가능한 <strong>차세대 사업 아이디어 풀(pool)</strong>을 사내에서 정기적으로 도출·축적해야 합니다. 분기 단위 아이디어 워크숍을 통해 후보를 평가·선별하고, 유망 아이디어는 <strong>경량 PoC → 1차 상품화 → 클라이언트 FDE</strong> 흐름으로 연결합니다.</p>
+      <div class="rec-meta"><span class="k">Owner</span><span>블록체인팀 + 사업기획</span></div>
+      <div class="rec-meta"><span class="k">Timeline</span><span>분기별 정례화</span></div>
+    </div>
+  </div>
+  <div class="signoff">
+    <div><strong>작성</strong>Timesoft · 블록체인팀 — 이진명 · 장재윤</div>
+    <div>— Continued on Next Page →</div>
+  </div>
+</section>
+
+<!-- 11 GALLERY -->
+<section id="gallery" class="page-block">
+  <div class="section-tag">11 / On-site Gallery</div>
+  <div class="section-head">
+    <div class="left">
+      <div class="kicker">— Section 09</div>
+      <h2>현장 갤러리</h2>
+    </div>
+    <div class="meta">현장에서 촬영한 부스 사진을 부스/솔루션 단위로 정리<br>썸네일을 누르면 큰 화면 · ← / → 키 또는 스와이프로 이동</div>
+  </div>
+  <div class="gal-stats">
+    <div class="gal-stat"><span class="num" id="galTopics">31</span><span class="label">Topics</span></div>
+    <div class="gal-stat"><span class="num" id="galPhotos">52</span><span class="label">Photos</span></div>
+    <div class="gal-stat"><span class="num">DAY 3</span><span class="label">Coverage</span></div>
+  </div>
+  <div id="topics"></div>
+</section>
+
+<!-- 12 EPILOGUE -->
+<section id="epilogue" class="page-block">
+  <div class="section-tag">12 / Epilogue</div>
+  <div class="section-head">
+    <div class="left">
+      <div class="kicker">— Section 10</div>
+      <h2>참관 후기</h2>
+    </div>
+    <div class="meta">현장에서 느낀 점 · 팀 차원의 짧은 소회<br>Visitors' Note · WIS 2026 Day 3</div>
+  </div>
+  <div class="epi-grid">
+    <div class="epi-photo-wrap">
+      <div class="epi-photo" role="img" aria-label="WIS 2026 참관 명찰"></div>
+      <div class="epi-caption"><span>— On-site · COEX</span><span class="gold">2026.04.24 / VISITOR</span></div>
+    </div>
+    <div class="epi-text">
+      <div class="epi-quote">"현장에서 마주한 한 가지 분명한 사실은,<br><span class="gold">2026년은 완벽한 AI 제품의 시대가 아니라 아이디어 선점이 더 중요한 '과도기'</span>라는 점이었습니다."</div>
+      <div class="epi-body">
+        <p>3일간 진행된 행사 중 마지막 날 참관임에도 불구하고 전시장은 활기로 가득하였으며, 단순한 기술 시연을 넘어 산업 현장의 실제 도입 사례와 운영 노하우가 공유되는 장이었다는 점이 가장 인상 깊었습니다. 그러나 한 걸음 들여다보면, 스타트업의 다수는 자체 LLM이 아닌 <strong>외부 LLM 활용 + 도메인 특화</strong> 전략에 머물러 있었고, 워크플로우 자동화·Team Agent 역시 대부분 반자동화 수준이었습니다. 즉, 혁신적이든 그렇지 않든 모두가 일제히 AX 전환을 시도하는 <strong>과도기</strong>의 한복판에 있었습니다.</p>
+        <p>당사 관점에서는 <strong>AI 산출물의 출처 검증과 무결성 보장</strong> 영역이 새로운 사업 기회로 부상하고 있다는 점이 가장 큰 수확이었습니다. 그동안 '블록체인 단독'으로 접근해 온 메시지를 'AI 시대를 받치는 신뢰 인프라'로 재구성한다면, 시장과의 접점은 한층 넓어질 것으로 판단됩니다.</p>
+        <p>끝으로, 짧은 하루의 참관이었지만 팀이 가진 기술 자산과 시장의 흐름을 다시 한 번 정렬해 볼 수 있었던 의미 있는 시간이었습니다. 본 보고서에서 도출된 시사점과 제언이 후속 PoC 및 사업 기획 단계에서 실질적인 출발점이 되기를 기대합니다.</p>
+      </div>
+      <div class="epi-callout">
+        <span class="cal-tag">→ Recommendation · Internal</span>
+        <div class="cal-head">컨퍼런스 참관은 <strong class="gold">블록체인팀에 한정되지 않고, 전사 차원에서 직군별 직원이 함께 참여</strong>해야 합니다.</div>
+        <p class="cal-body">현장에서 마주한 AI·AX 전환의 흐름은 특정 팀의 기술 이슈가 아닌 <strong>전사 사업 전반의 방향성</strong>과 직결됩니다. 기획·영업·개발 등 각 직군이 직접 시장의 온도를 체감해야 부서별 사업 아이디어와 도메인 인사이트가 도출되며, 차기 WIS 및 주요 ICT 컨퍼런스에는 <strong>팀별 1인 이상 의무 참관</strong>을 정례화할 것을 제안드립니다.</p>
+      </div>
+      <div class="epi-byline">
+        <div>
+          <div class="who"><strong>작성</strong>Timesoft · 블록체인팀</div>
+          <div class="who-names">이진명 · 장재윤</div>
+        </div>
+        <div class="stamp">— END · WIS 2026 REPORT</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX (gallery) -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="사진 확대">
+  <button class="lb-btn lb-close" id="lbClose" aria-label="닫기">✕</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="이전">‹</button>
+  <button class="lb-btn lb-next" id="lbNext" aria-label="다음">›</button>
+  <div class="lb-stage">
+    <img class="lb-img" id="lbImg" alt="">
+    <div class="lb-meta">
+      <span class="lb-id" id="lbId">000-0</span>
+      <p class="lb-cap" id="lbCap"></p>
+      <span class="lb-counter" id="lbCounter">0 / 0</span>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="report-foot">
+  <div class="foot-inner">
+    <span>© 2026 TIMESOFT · BLOCKCHAIN TEAM</span>
+    <span>WIS 2026 PARTICIPATION REPORT</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ---- TOC ----
+  const TOC = [
+    ['01','표지','Cover','#cover'],
+    ['02','목차','Table of Contents','#toc'],
+    ['03','행사 개요','Event Overview','#overview'],
+    ['04','참관 일정','Visit Schedule','#schedule'],
+    ['05','전시 하이라이트','Exhibition Highlights','#highlights'],
+    ['06','컨퍼런스 세션','Conference Sessions','#conference'],
+    ['07','기술 트렌드','Technology Trends','#trends'],
+    ['08','벤치마킹','Competitor & Solution Benchmark','#benchmark'],
+    ['09','시사점','Key Implications','#implications'],
+    ['10','제언','Recommendations','#recommendations'],
+    ['11','현장 갤러리','On-site Gallery','#gallery'],
+    ['12','참관 후기','Epilogue · Visitors\' Note','#epilogue'],
+  ];
+  const tocGrid = document.getElementById('tocGrid');
+  for (const [n, t, sub, href] of TOC) {
+    const a = document.createElement('a');
+    a.href = href;
+    a.className = 'toc-item';
+    a.innerHTML = '<span class="toc-num">'+n+'</span><span class="toc-title">'+t+'<span class="sub">'+sub+'</span></span><span class="toc-page">P.'+n+'</span>';
+    tocGrid.appendChild(a);
+  }
+
+  // ---- Gallery data ----
+  const TITLES = {
+    '001':'AI 챗봇 및 건설사 AI 관리솔루션','002':'SKT A.note · AI 회의록 자동 작성','003':'SKT AI LLM 모델',
+    '004':'AI 광고 이미지 생성 플랫폼','005':'재판 사례 분석 · AI 재판지원','006':'AI GPU Managed 관리',
+    '007':'K intelligence Studio · 문서 관리','008':'KT LLM 믿음 K2.5 Pro','009':'타입캐스트 · AI 음성/영상 플랫폼',
+    '010':'롯데 AI 로봇','011':'AI 문서 처리 · 팩스 자동화','012':'해외영업 지원',
+    '013':'통역 + 회의록 자동화 협업 플랫폼','014':'외주 개발 서비스','015':'AI 업무 자동화 플랫폼',
+    '016':'스마트 헬스 파트너','017':'건설/공장 스마트 안전보조장치','018':'BIS 버스 안내 시스템',
+    '019':'도청·녹취 방지 솔루션','020':'디자이노블 · AI 검색 가시성','021':'공공행정 민원 응대 AI',
+    '022':'인증서 관리 플랫폼','023':'급여 선지급 서비스','025':'멀티에이전트 LLM 토론 플랫폼',
+    '026':'미래 예측형 보행자 안전 AI','027':'전자서명 솔루션','028':'실시간 다국어 소통 솔루션',
+    '029':'Team Agent · 조직 업무 자동화','031':'블록체인 기반 콜드체인 AIOT 플랫폼','032':'제조 공정 AI 어시스턴트',
+    '033':'해산물 배송 시스템','034':'GPU 운영 관리 솔루션'
+  };
+  const DESCS = {
+    '001':'건설 현장과 본사 간 커뮤니케이션을 자동화하는 AI 챗봇과, 시공·안전·자재 데이터를 통합 관리하는 건설사 전용 AI 솔루션.',
+    '002':'SKT의 AI 회의록 자동 작성 솔루션 A.note. 회의 음성을 실시간 녹취·요약하고 발화자 분리·키워드 추출·액션 아이템 정리까지 지원.',
+    '003':'SKT의 자체 대규모 언어모델(LLM) 시연. 한국어 특화 학습과 멀티모달 처리 능력을 강조하며, 다양한 B2B 활용 사례를 전시.',
+    '004':'일반 상품 사진을 입력하면 AI가 광고용 비주얼·배경·카피를 자동 생성해 주는 마케팅 플랫폼. 소상공인·온라인 셀러를 겨냥.',
+    '005':'누적된 판례 데이터베이스를 학습한 AI가 유사 사건 검색·쟁점 분석·승소율 예측을 지원하는 리걸테크 솔루션.',
+    '006':'AI 학습·추론에 사용되는 GPU 자원의 할당·모니터링·과금을 통합 관리하는 매니지드 서비스.',
+    '007':'KT의 K intelligence Studio 기반 기업 문서 관리 솔루션. 사내 문서 자동 분류·요약, 자연어 질의 검색을 지원.',
+    '008':'KT의 한국어 특화 LLM 믿음(Mi:dm) 차세대 버전 K2.5 Pro. 추론·컨텍스트 처리 능력을 강화.',
+    '009':'타입캐스트는 텍스트만 입력해도 AI 음성·영상 콘텐츠를 자동 생성하는 플랫폼. 부스에서 QR 코드로 1개월 API 무료 체험 안내.',
+    '010':'롯데가 개발 중인 서비스용 AI 로봇 시연. 매장 안내·고객 응대·물품 운반 등 리테일 자동화 시나리오.',
+    '011':'종이·전자 문서를 AI가 자동 분류·요약·승인 라우팅한 뒤 거래처에 팩스로 전송하는 업무 자동화 솔루션.',
+    '012':'한국 ICT 솔루션의 해외 진출을 지원하는 부스. 글로벌 바이어 매칭, 수출 상담, 해외 인증·현지화 컨설팅.',
+    '013':'다국어 실시간 통역과 회의록 자동 생성을 결합한 비즈니스 협업 플랫폼.',
+    '014':'AI·웹·모바일 등 다양한 분야의 외주 개발 서비스 부스. 디지털 전환 프로젝트 인력 매칭 제공.',
+    '015':'반복 사무 업무를 AI 에이전트가 자동화하는 RPA·AI 융합 플랫폼. 노코드 워크플로우 빌더와 사내 시스템 연동 지원.',
+    '016':'웨어러블·건강검진 데이터를 통합 분석해 개인 맞춤형 건강관리를 제공하는 스마트 헬스 플랫폼.',
+    '017':'건설·공장에서 작업자 안전을 지원하는 IoT 안전보조장치. 추락·충돌·이상 자세 감지, 위험 지역 진입 경고 등을 실시간 제공.',
+    '018':'버스 정류장과 차량 내부에 설치되는 버스정보시스템(BIS). 도착 예정 시간, 노선·환승 정보, 혼잡도 등을 실시간 표출.',
+    '019':'임원실·회의실 등 보안 공간에서 도청·녹취 시도를 탐지·차단하는 솔루션. 무선 신호 분석, 음성 마스킹 등 결합.',
+    '020':'디자이노블의 AI 기반 검색 가시성(SEO·AEO) 솔루션. ChatGPT·Perplexity 등 생성형 AI 검색 노출 최적화 전략 제안.',
+    '021':'공공기관 민원 응대를 AI가 보조하는 서비스. 음성·챗봇 채널 민원 분류·요약·우선순위화, 담당자 배정 자동화.',
+    '022':'기업·기관에서 사용하는 공인·사설 인증서의 발급·갱신·폐기를 통합 관리하는 PKI 플랫폼.',
+    '023':'근무한 만큼의 급여를 정기 급여일 이전에 즉시 받을 수 있는 핀테크 서비스. 근태 데이터 연동, 신청 즉시 입금.',
+    '025':'GPT, Claude Code 등 서로 다른 LLM 에이전트가 동일 과제를 두고 토론·협업하는 멀티에이전트 오케스트레이션 플랫폼.',
+    '026':'CCTV·차량 센서 영상을 AI가 분석해 보행자 충돌 위험을 사전 예측·경고하는 도시 안전 솔루션.',
+    '027':'비대면 계약·동의서 처리를 위한 전자서명 SaaS. 본인인증, 서명 흐름 자동화, 위·변조 방지 검증 지원.',
+    '028':'다국어 사용자 간 음성·텍스트 대화를 실시간 통역해 주는 커뮤니케이션 솔루션. 콜센터·관광·의료 안내 등 활용.',
+    '029':'팀 단위 업무 흐름을 학습한 AI가 일정 조율, 자료 정리, 회의 준비, 후속 조치까지 자동 처리해 주는 Team Agent.',
+    '031':'의약품·바이오 물류의 콜드체인 상태를 IoT 센서로 수집하고 블록체인에 기록하여 위·변조 없는 이력 추적을 제공.',
+    '032':'제조 라인 작업 매뉴얼·이상 데이터를 학습한 AI가 현장 작업자에게 실시간 가이드와 트러블슈팅을 제공.',
+    '033':'산지 직송 해산물의 신선도 유지를 위한 콜드체인 배송 플랫폼. 주문·재고·물류 추적 통합, 온도 이력 기반 신뢰성 유통.',
+    '034':'다수 GPU 자원의 할당, 작업 큐, 사용량 모니터링, 비용 최적화를 통합한 GPU 운영 관리 솔루션.'
+  };
+  const FILES = [
+    '001-1.jpg','001-2.jpg','002-1.jpg','003-1.jpg','004-1.jpg','005-1.jpg','006-1.jpg','007-1.jpg','008-1.jpg',
+    '009-1.jpg','009-2.jpg','010-1.jpg','011-1.jpg','012-1.jpg','013-1.jpg','014-1.jpg','015-1.jpg','016-1.jpg',
+    '017-1.jpg','017-2.jpg','017-3.jpg','018-1.jpg','018-2.jpg','018-3.jpg','018-4.jpg','019-1.jpg','020-1.jpg',
+    '021-1.jpg','021-2.jpg','021-3.jpg','021-4.jpg','022-1.jpg','022-2.jpg','022-3.jpg','023-1.jpg','025-1.jpg',
+    '026-1.jpg','027-1.jpg','027-2.jpg','027-3.jpg','028-1.jpg','028-2.jpg','028-3.jpg','029-1.jpg',
+    '031-1.jpg','031-2.jpg','031-3.jpg','032-1.jpg','032-2.jpg','033-1.jpg','034-1.jpg','034-2.jpg'
+  ];
+
+  const groups = {};
+  const order = [];
+  for (let i = 0; i < FILES.length; i++) {
+    const f = FILES[i];
+    const ident = f.replace(/\.[^.]+$/, '');
+    const prefix = ident.split('-')[0];
+    if (!groups[prefix]) { groups[prefix] = []; order.push(prefix); }
+    groups[prefix].push({ file: f, ident, globalIdx: i });
+  }
+  document.getElementById('galTopics').textContent = order.length;
+  document.getElementById('galPhotos').textContent = FILES.length;
+
+  const topicsEl = document.getElementById('topics');
+  for (const p of order) {
+    const sec = document.createElement('div');
+    sec.className = 'topic';
+    const head = document.createElement('div');
+    head.className = 'topic-head';
+    head.innerHTML =
+      '<div class="topic-num">'+p+'</div>'+
+      '<h3 class="topic-title">'+(TITLES[p]||'—')+'</h3>'+
+      '<div class="topic-count">'+groups[p].length+' photo'+(groups[p].length>1?'s':'')+'</div>'+
+      '<p class="topic-desc">'+(DESCS[p]||'')+'</p>';
+    sec.appendChild(head);
+    const g = document.createElement('div');
+    g.className = 'topic-grid';
+    for (const ph of groups[p]) {
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'gal-card';
+      card.dataset.idx = ph.globalIdx;
+      card.innerHTML = '<div class="gal-card-img"><img loading="lazy" src="gallery/'+ph.file+'" alt="'+ph.ident+'"></div><span class="gal-card-id">'+ph.ident+'</span>';
+      g.appendChild(card);
+    }
+    sec.appendChild(g);
+    topicsEl.appendChild(sec);
+  }
+
+  // ---- Lightbox ----
+  const PHOTOS = [];
+  for (const p of order) for (const ph of groups[p]) PHOTOS.push({file:ph.file,ident:ph.ident,prefix:p});
+
+  const lb = document.getElementById('lb');
+  const lbImg = document.getElementById('lbImg');
+  const lbId = document.getElementById('lbId');
+  const lbCap = document.getElementById('lbCap');
+  const lbCounter = document.getElementById('lbCounter');
+  let cur = 0;
+
+  function render(){
+    const p = PHOTOS[cur];
+    lbImg.src = 'gallery/'+p.file; lbImg.alt = p.ident;
+    lbId.textContent = p.ident;
+    lbCap.textContent = DESCS[p.prefix] || '';
+    lbCounter.textContent = (cur+1)+' / '+PHOTOS.length;
+  }
+  function open(i){ cur = i; render(); lb.classList.add('is-open'); document.body.style.overflow='hidden'; }
+  function close(){ lb.classList.remove('is-open'); document.body.style.overflow=''; }
+  function go(d){ cur = (cur + d + PHOTOS.length) % PHOTOS.length; render(); }
+
+  topicsEl.addEventListener('click', e => {
+    const c = e.target.closest('.gal-card'); if (!c) return;
+    open(parseInt(c.dataset.idx,10));
+  });
+  document.getElementById('lbPrev').addEventListener('click', e=>{e.stopPropagation();go(-1);});
+  document.getElementById('lbNext').addEventListener('click', e=>{e.stopPropagation();go(1);});
+  document.getElementById('lbClose').addEventListener('click', close);
+  lb.addEventListener('click', e=>{ if (e.target === lb || e.target.classList.contains('lb-stage')) close(); });
+  document.addEventListener('keydown', e=>{
+    if (!lb.classList.contains('is-open')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') go(-1);
+    else if (e.key === 'ArrowRight') go(1);
+  });
+  let tx = null;
+  lb.addEventListener('touchstart', e=>{ if (e.touches.length === 1) tx = e.touches[0].clientX; }, {passive:true});
+  lb.addEventListener('touchend', e=>{
+    if (tx === null) return;
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+    tx = null;
+  }, {passive:true});
+})();
+</script>
+</body>
+</html>
